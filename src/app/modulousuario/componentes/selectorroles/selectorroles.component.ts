@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Rol } from 'src/app/clases/rol';
 import { Output, EventEmitter } from '@angular/core';
 
@@ -12,12 +12,14 @@ export class SelectorrolesComponent implements OnInit {
   @Output() seleccionarRolEvent = new EventEmitter<string>();
   keys = Object.keys;
   roles = Rol;
-
+  mostrar?:string;
+  @Input() item = '';
   constructor() { }
 
   ngOnInit(): void {
+    this.mostrar= this.item;
   }
-
+  
   rolSeleccionado(value:string){
     this.seleccionarRolEvent.emit(value);
   }

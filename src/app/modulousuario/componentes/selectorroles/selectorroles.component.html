@@ -1,4 +1,6 @@
 <div class="btn-group" role="group" aria-label="Basic outlined example" *ngFor="let rol of keys(roles)">
-    <button type="button" class="btn btn-outline-primary" (click)="rolSeleccionado(rol)"><img src="\assets\imagenes\{{rol}}.png" width="100" height="100"/>{{rol}}</button>
+    <button type="button" class="btn btn-outline-primary" (click)="rolSeleccionado(rol)"><img src="\assets\imagenes\{{rol}}.png" width="90" height="90"/>
+      <p *ngIf="mostrar=='mostrar'">{{rol}}</p>
+    </button>
   </div>
 

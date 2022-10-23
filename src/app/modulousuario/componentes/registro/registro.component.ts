@@ -15,6 +15,7 @@ import { ConfirmedValidator } from 'src/app/validador/ConfirmedValidator';
 })
 export class RegistroComponent implements OnInit {
 
+  mostrarElemento= 'mostrar';
   rolObtenido:string ='';
   crearnuevaEspecialidad:boolean=false;
   registroUsuario = this.fb.group({
@@ -43,7 +44,6 @@ export class RegistroComponent implements OnInit {
   mostrarFormulario(rol : string)
   {
     this.rolObtenido= rol;
-    console.log(rol);
   }
   sumarEspecialidad(){
   this.crearnuevaEspecialidad= !this.crearnuevaEspecialidad;

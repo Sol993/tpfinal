@@ -1,7 +1,7 @@
-<div class="text-center">
-    <app-selectorroles (seleccionarRolEvent)="mostrarFormulario($event)"></app-selectorroles>
+<div class="text-center p-5 mb-4 bg-light rounded-3">
+    <app-selectorroles [item]="mostrarElemento" (seleccionarRolEvent)="mostrarFormulario($event) "></app-selectorroles>
 </div>
-<div *ngIf="rolObtenido">
+<div class="p-5 mb-4 bg-light rounded-3" *ngIf="rolObtenido">
     <form [formGroup]="registroUsuario" (ngSubmit)="registrar()">
         <div>
             <label for="nombre" class="form-label">Nombre*</label>

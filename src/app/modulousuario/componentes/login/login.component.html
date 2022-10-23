@@ -1,16 +1,33 @@
-<div class="bodyLogin text-center">
+<div class="text-center p-5 mb-4 bg-light rounded-3">
+    <app-selectorroles (seleccionarRolEvent)="mostrarFormulario($event)"></app-selectorroles>
+    <div *ngIf="rolObtenido=='Paciente'"><hr>
+        <button type="button" class="btn btn-warning" (click)="usuarioRegistrado()"><img src="\assets\imagenes\img-paciente.png" width="50" height="50" />Paciente uno</button>
+        <button type="button" class="btn btn-warning" (click)="usuarioRegistradoDos()"><img src="\assets\imagenes\img-paciente.png" width="50" height="50" />Paciente dos</button>
+        <button type="button" class="btn btn-warning" (click)="usuarioRegistradoTres()"><img src="\assets\imagenes\img-paciente.png" width="50" height="50" />Paciente dos</button>
+    </div>    
+    <div *ngIf="rolObtenido=='Administrador'"><hr>
+        <button type="button" class="btn btn-warning" (click)="usuarioAdmin()"><img src="\assets\imagenes\img-admin.png" width="50" height="50" />Administrador</button>    
+    </div>
+
+     <div *ngIf="rolObtenido=='Especialista'"><hr>
+        <button type="button" class="btn btn-warning" (click)="usuarioEspecialita()"><img src="\assets\imagenes\img-especialista.png" width="50" height="50" />Especialista </button>
+        <button type="button" class="btn btn-warning" (click)="usuarioEspecialita()"><img src="\assets\imagenes\img-especialista.png" width="50" height="50" />Especialista </button>
+
+    </div>
+
+
+<div>
     <main class="form-signin w-100 m-auto">
       
-            <svg class="mb-4" xmlns="http://www.w3.org/2000/svg" width="100" height="100" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
-                <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
-                <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
-              </svg>
+        <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" fill="currentColor" class="bi bi-person-badge-fill" viewBox="0 0 16 16">
+            <path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2zm4.5 0a.5.5 0 0 0 0 1h3a.5.5 0 0 0 0-1h-3zM8 11a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm5 2.755C12.146 12.825 10.623 12 8 12s-4.146.826-5 1.755V14a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-.245z"/>
+          </svg>
               <form [formGroup]="loguearse" (ngSubmit)="logIn()">
 
           <h2 class="h3 mb-3 fw-normal">Ingresa a tu cuenta</h2>
       
           <div class="form-floating">
-            <input type="text" class="form-control" id="floatingInput" formControlName="email" placeholder="Ingrese el email" >
+            <input type="text" [(ngModel)]="this.email"  class="form-control" id="floatingInput" formControlName="email" placeholder="Ingrese el email" >
             <div class="invalid alert alert-danger"
             *ngIf="loguearse.controls.email.errors?.['required'] &&
             loguearse.controls.email.touched">
@@ -23,7 +40,7 @@
             <label for="floatingInput">Email</label>
           </div>
           <div class="form-floating">
-            <input type="password" class="form-control" id="floatingPassword" formControlName="password" placeholder="Ingrese el contraseña" >
+            <input type="password" [(ngModel)]="this.password"  class="form-control" id="floatingPassword" formControlName="password" placeholder="Ingrese el contraseña" >
             <label for="floatingPassword">Contraseña</label>
           </div>
           <button type="submit" class="btn btn-info btn-encuesta" id="saveForm" [disabled]="loguearse.invalid">Ingresar</button>
@@ -31,3 +48,4 @@
       </main>
     </div>
     
+</div>

@@ -18,7 +18,7 @@ import { LoginComponent } from './componentes/login/login.component';
     RegistroComponent,
     ListadoespecialidadesComponent,
     AgregarespecialidadComponent,
-    LoginComponent
+    LoginComponent,
   ],
   imports: [
     CommonModule,

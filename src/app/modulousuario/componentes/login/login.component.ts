@@ -11,7 +11,10 @@ import Swal from 'sweetalert2';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+  rolObtenido:string ='';
 
+  public email : string = "";
+  public password : string = "";
   loguearse = this.fb.group({
  
     'email': ['', [Validators.required, Validators.email]],
@@ -49,5 +52,30 @@ export class LoginComponent implements OnInit {
       }
     });
   }
+  mostrarFormulario(rol : string)
+  {
+    this.rolObtenido= rol;
+  }
+  usuarioRegistrado(){
+    this.email="carla.autum@utn.com";
+    this.password="1234567";
+  }
+  usuarioRegistradoDos(){
 
+  this.email="cuenta@test.com";
+  this.password="12345345";
+}
+usuarioRegistradoTres(){
+
+  this.email="German.Guemes@test.com";
+  this.password="1234567";
+}
+usuarioAdmin(){
+  this.email="admin@admin.com";
+  this.password="1234567";
+}
+usuarioEspecialita(){
+  this.email="admin@admin.com";
+  this.password="1234567";
+}
 }
