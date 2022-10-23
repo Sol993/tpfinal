@@ -5,24 +5,29 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BienvenidaComponent } from './componentes/bienvenida/bienvenida.component';
 import { NavComponent } from './componentes/nav/nav.component';
-import { LoginComponent } from './componentes/login/login.component';
-import { RegistroComponent } from './componentes/registro/registro.component';
 import { HomeComponent } from './componentes/home/home.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ClinicaservicioService } from './servicios/clinicaservicio.service';
+import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+import { AngularFireModule } from '@angular/fire/compat';
+import { environment } from 'src/environments/environment';
 
 @NgModule({
   declarations: [
     AppComponent,
     BienvenidaComponent,
     NavComponent,
-    LoginComponent,
-    RegistroComponent,
-    HomeComponent
+    HomeComponent,
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
+    AngularFireAuthModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
   ],
-  providers: [],
+  providers: [ClinicaservicioService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

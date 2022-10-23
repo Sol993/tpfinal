@@ -1,0 +1,3 @@
+<select class="form-group form-select" multiple="multiple"  [(ngModel)]="seleccionados" (change)="selecionarEspecialidad()">
+    <option *ngFor="let especialidad of especialidades">{{especialidad.nombre}}</option>
+</select>

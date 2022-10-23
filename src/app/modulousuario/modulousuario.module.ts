@@ -3,15 +3,29 @@ import { CommonModule } from '@angular/common';
 
 import { ModulousuarioRoutingModule } from './modulousuario-routing.module';
 import { ModulousuarioComponent } from './modulousuario.component';
+import { SelectorrolesComponent } from './componentes/selectorroles/selectorroles.component';
+import { RegistroComponent } from './componentes/registro/registro.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ListadoespecialidadesComponent } from './componentes/listadoespecialidades/listadoespecialidades.component';
+import { AgregarespecialidadComponent } from './componentes/agregarespecialidad/agregarespecialidad.component';
+import { LoginComponent } from './componentes/login/login.component';
 
 
 @NgModule({
   declarations: [
-    ModulousuarioComponent
+    ModulousuarioComponent,
+    SelectorrolesComponent,
+    RegistroComponent,
+    ListadoespecialidadesComponent,
+    AgregarespecialidadComponent,
+    LoginComponent
   ],
   imports: [
     CommonModule,
-    ModulousuarioRoutingModule
-  ]
+    ModulousuarioRoutingModule,
+    ReactiveFormsModule,
+    FormsModule
+  ],
+
 })
 export class ModulousuarioModule { }
