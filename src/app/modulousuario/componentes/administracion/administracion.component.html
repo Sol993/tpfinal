@@ -1,0 +1,45 @@
+<div class="bg-light p-5 rounded text-center">
+    <h4>Pagina de administracion!</h4>
+    <div class="container text-center" id="salaChat">
+        <div>
+            <div id="chatbox">
+           
+            <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th scope="col">DNI</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Apellido</th>
+                    <th scope="col">Rol</th>
+                    <th scope="col">Estado</th>
+                    <th scope="col">Especialidad/Obra Social</th>
+                    <th scope="col">Acciones</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of arrayUsuarios;" >
+                    <th scope="row">{{item.dni}}</th>
+                    <td>{{item.email}}</td>
+                    <td>{{item.nombre}}</td>
+                    <td>{{item.apellido}}</td>
+                    <td>{{item.rol}}</td>
+                    <td>{{item.estado}}</td>
+                    <td>
+                        <p *ngIf="item.rol=='Administrador'">-</p>
+                        <p *ngIf="item.rol=='Paciente'">{{item.obraSocial}}</p>
+                        <p *ngIf="item.rol=='Especialista'">{{item.especialidades}}</p>
+                    </td>
+                    <td>
+                        <p *ngIf="item.rol=='Administrador'||item.rol=='Paciente'" ></p>
+                        <div  *ngIf=" item.rol=='Especialista' && item.estado=='Pendiente'" class="btn-group" role="group" aria-label="Basic mixed styles example">
+                        <button type="button" class="btn btn-danger" (click)="rechazarEspecialista(item)">❌</button>
+                        <button type="button" class="btn btn-success" (click)="aprobarEspecialista(item)">✔</button>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+    </div>
+</div>

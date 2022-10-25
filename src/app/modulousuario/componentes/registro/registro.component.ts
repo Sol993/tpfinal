@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Especialistas } from 'src/app/clases/especialistas';
+import { Estado } from 'src/app/clases/estado';
 import { Paciente } from 'src/app/clases/paciente';
 import { Rol } from 'src/app/clases/rol';
 import { Usuario } from 'src/app/clases/usuario';
@@ -72,6 +73,7 @@ export class RegistroComponent implements OnInit {
             this.paciente.fechaCreacion=new Date(Date.now()).toLocaleString();
             this.paciente.imagenDePerfil=".\assets\imagenes\avatar-girl.jpg";
             this.paciente.imagenDePerfilDos=".\assets\imagenes\avatar-girl.jpg";
+            this.paciente.estado=Estado.Aprobado;
             this.paciente.rol=Rol.Paciente;         
             console.log(res);
     
@@ -92,7 +94,8 @@ export class RegistroComponent implements OnInit {
       this.especialista.especialidades = this.seleccionados;
       this.especialista.fechaCreacion=new Date(Date.now()).toLocaleString();
       this.especialista.imagenDePerfil=".\assets\imagenes\avatar-girl.jpg";
-      this.especialista.rol=Rol.Especialista;         
+      this.especialista.rol=Rol.Especialista;     
+      this.especialista.estado=Estado.Pendiente;    
        this._ser.altaUsuarioBD(this.especialista).then(() => { 
               this._router.navigate(['home']);
             });   

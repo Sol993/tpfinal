@@ -9,11 +9,14 @@ import { Output, EventEmitter } from '@angular/core';
 })
 export class SelectorrolesComponent implements OnInit {
 
-  @Output() seleccionarRolEvent = new EventEmitter<string>();
+ 
   keys = Object.keys;
   roles = Rol;
   mostrar?:string;
+  mostrarSoloLetra?:string;
   @Input() item = '';
+
+  @Output() seleccionarRolEvent = new EventEmitter<string>();
   constructor() { }
 
   ngOnInit(): void {

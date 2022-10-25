@@ -11,8 +11,8 @@ import Swal from 'sweetalert2';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+ 
   rolObtenido:string ='';
-
   public email : string = "";
   public password : string = "";
   loguearse = this.fb.group({
@@ -75,7 +75,11 @@ usuarioAdmin(){
   this.password="1234567";
 }
 usuarioEspecialita(){
-  this.email="admin@admin.com";
-  this.password="1234567";
+  this.email="patricia.roberto@medico.com";
+  this.password="contraseña1234";
+}
+usuarioEspecialitaDos(){
+  this.email="dani@doc.com";
+  this.password="123456";
 }
 }

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { map } from 'rxjs';
 import { ClinicaservicioService } from 'src/app/servicios/clinicaservicio.service';
 
 @Component({
@@ -8,33 +9,58 @@ import { ClinicaservicioService } from 'src/app/servicios/clinicaservicio.servic
   styleUrls: ['./nav.component.css']
 })
 export class NavComponent implements OnInit {
-  public logueado:boolean;
-  public usuario:any;
+  public logueado: boolean = false;
+  public logueadoAdmin: boolean = false;
+  public usuario: any;
 
   constructor(private _router:Router, private _servicio: ClinicaservicioService) { 
     this.logueado=false;
+    this.logueadoAdmin=false;
   }
 
+
   ngOnInit(): void {
-    
+    this.usuarioLogueado();
   }
-  usuarioLogueado(){
-    this._servicio.getInfoUsuarioLoggeado().subscribe(res=>{
-      if(res!=null){
-        this.logueado=true;
-        this.usuario=res;
-      }else{
-        this.logueado=false;
+
+
+  usuarioLogueado() {
+    this._servicio.getInfoUsuarioLogueado().subscribe(res => {
+      if (res !== null) {
+        this.logueado = true;
+
+        this._servicio.obtenerUsuarioPorID(res.uid).snapshotChanges().pipe(
+          map(changes =>
+            changes.map(c =>
+              ({ id: c.payload.doc.id, ...c.payload.doc.data() })
+            )
+          )
+        ).subscribe(data => {
+          this.usuario = data[0];
+          if (this.usuario.rol == "Administrador") {
+            this.logueadoAdmin=true;
+          } else {
+            this.logueadoAdmin = false;
+          }
+
+        });
+
+      } else {
+        this.logueado = false;
+        this.logueadoAdmin = false;
+
       }
-    });
-    
+    })
   }
-  logOut():void
-  {
-    this._servicio.logOut().then(res=>{
-      this.logueado=false;
-      this._router.navigate(['home']);
-    });
+  cerrarSesion() {
+    this.logueado= false;
+    this.logueadoAdmin = false;
+    this._servicio.logOut();
+    this._router.navigate(['/usuario/login']);
+    /*this._servicio.logOut().then (res=>{
+     
+
+    });*/
   }
 
 }

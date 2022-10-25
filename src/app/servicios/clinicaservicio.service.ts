@@ -11,7 +11,9 @@ import { Usuario } from '../clases/usuario';
 export class ClinicaservicioService {
 
   private usuario: AngularFirestoreCollection<Usuario>;
+
   private especialidad: AngularFirestoreCollection<Especialidad>;
+  public currentUser: any;
 
 
   constructor(private _auth :AngularFireAuth,private _db :AngularFirestore) {
@@ -39,29 +41,46 @@ export class ClinicaservicioService {
   }
   //login
   async login(email: string, password: string){
-    try{
-      return await this._auth.signInWithEmailAndPassword(email,password);
-      
+    try
+    {
+     // return await this._auth.signInWithEmailAndPassword(email,password);
+     return this._auth.signInWithEmailAndPassword(email, password)
+     .then((user)=>{
+       this._db.collection("usuarios").ref.where("email", "==", user.user?.email).onSnapshot(snap =>{
+         snap.forEach(userRef => {
+           this.currentUser = userRef.data();
+           let idUsuario:string = this.currentUser.idUsuario
+           localStorage.setItem("usuarioID", idUsuario)
+         })
+       })
+      })
     }
-    catch(error){
+    catch(error)
+    {
       Swal.fire({
-        title: 'Erorr tu email o contraseña es invalidad  ' + error,
+        title: '"No se ha podio realizar el login  ' + error,
         width: 600,
         padding: '3em',
         color: '#716add',
       })
+      console.log("No se ha podio realizar el login "+ error);
       return null;
     }
   }
   async logOut()
   {
     this._auth.signOut();
-   
+    localStorage.removeItem('usuarioID');
   }
-  getInfoUsuarioLoggeado()
+  getInfoUsuarioLogueado()
   {
     return this._auth.authState;
   }
+
+  obtenerUsuarioPorID(idFilter: string):  AngularFirestoreCollection<Usuario>{
+    return this._db.collection('usuarios', ref => ref.where('idUsuario','==', idFilter ));
+  }
+
   //altausuario bd
   altaUsuarioBD(user: Usuario): any {
     return this.usuario.add({ ...user });
@@ -72,6 +91,12 @@ export class ClinicaservicioService {
 
   agregarEspecialidad(nuevaespecialidad: Especialidad): any {
     return this.especialidad.add({ ...nuevaespecialidad });
+  }
+  obtenerusuarios(): AngularFirestoreCollection<Usuario> {
+    return this.usuario;
+  }
+  update(id: string, data: any): Promise<void> {
+    return this.usuario.doc(id).update(data);
   }
 
 }

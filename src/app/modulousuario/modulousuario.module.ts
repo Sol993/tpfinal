@@ -9,6 +9,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ListadoespecialidadesComponent } from './componentes/listadoespecialidades/listadoespecialidades.component';
 import { AgregarespecialidadComponent } from './componentes/agregarespecialidad/agregarespecialidad.component';
 import { LoginComponent } from './componentes/login/login.component';
+import { AdministracionComponent } from './componentes/administracion/administracion.component';
+import { PerfilComponent } from './componentes/perfil/perfil.component';
 
 
 @NgModule({
@@ -19,6 +21,8 @@ import { LoginComponent } from './componentes/login/login.component';
     ListadoespecialidadesComponent,
     AgregarespecialidadComponent,
     LoginComponent,
+    AdministracionComponent,
+    PerfilComponent,
   ],
   imports: [
     CommonModule,
