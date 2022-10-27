@@ -56,7 +56,8 @@ export class NavComponent implements OnInit {
     this.logueado= false;
     this.logueadoAdmin = false;
     this._servicio.logOut();
-    this._router.navigate(['/usuario/login']);
+    window.location.href="/home";
+   /// this._router.navigate(['/usuario/login']);
     /*this._servicio.logOut().then (res=>{
      
 

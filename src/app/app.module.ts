@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule,CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -11,6 +11,10 @@ import { ClinicaservicioService } from './servicios/clinicaservicio.service';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { AngularFireModule } from '@angular/fire/compat';
 import { environment } from 'src/environments/environment';
+import { LoadingComponent } from './componentes/loading/loading.component';
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { NgxSpinnerModule } from "ngx-spinner";
+
 
 @NgModule({
   declarations: [
@@ -18,6 +22,8 @@ import { environment } from 'src/environments/environment';
     BienvenidaComponent,
     NavComponent,
     HomeComponent,
+    LoadingComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -26,7 +32,11 @@ import { environment } from 'src/environments/environment';
     ReactiveFormsModule,
     AngularFireAuthModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
+    BrowserAnimationsModule,
+    NgxSpinnerModule.forRoot({ type: 'ball-scale-multiple' })
+
   ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [ClinicaservicioService],
   bootstrap: [AppComponent]
 })

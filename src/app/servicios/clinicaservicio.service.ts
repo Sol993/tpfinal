@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import{ AngularFireAuth }from '@angular/fire/compat/auth';
 import { AngularFirestore, AngularFirestoreCollection  } from '@angular/fire/compat/firestore';
+import { NgxSpinnerService } from 'ngx-spinner';
 import Swal from 'sweetalert2';
 import { Especialidad } from '../clases/especialidad';
 import { Usuario } from '../clases/usuario';
@@ -16,7 +17,7 @@ export class ClinicaservicioService {
   public currentUser: any;
 
 
-  constructor(private _auth :AngularFireAuth,private _db :AngularFirestore) {
+  constructor(private _auth :AngularFireAuth,private _db :AngularFirestore, private spinnerService: NgxSpinnerService) {
     this.usuario = _db.collection('usuarios');
     this.especialidad = _db.collection('especialidades');
 
@@ -43,11 +44,13 @@ export class ClinicaservicioService {
   async login(email: string, password: string){
     try
     {
+      this.spinnerService.show();
      // return await this._auth.signInWithEmailAndPassword(email,password);
      return this._auth.signInWithEmailAndPassword(email, password)
      .then((user)=>{
        this._db.collection("usuarios").ref.where("email", "==", user.user?.email).onSnapshot(snap =>{
          snap.forEach(userRef => {
+          this.spinnerService.hide();
            this.currentUser = userRef.data();
            let idUsuario:string = this.currentUser.idUsuario
            localStorage.setItem("usuarioID", idUsuario)

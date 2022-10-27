@@ -11,6 +11,7 @@ import { AgregarespecialidadComponent } from './componentes/agregarespecialidad/
 import { LoginComponent } from './componentes/login/login.component';
 import { AdministracionComponent } from './componentes/administracion/administracion.component';
 import { PerfilComponent } from './componentes/perfil/perfil.component';
+import { LoadingComponent } from '../componentes/loading/loading.component';
 
 
 @NgModule({
@@ -28,8 +29,9 @@ import { PerfilComponent } from './componentes/perfil/perfil.component';
     CommonModule,
     ModulousuarioRoutingModule,
     ReactiveFormsModule,
-    FormsModule
-  ],
+    FormsModule,
+    
+  ], 
 
 })
 export class ModulousuarioModule { }
