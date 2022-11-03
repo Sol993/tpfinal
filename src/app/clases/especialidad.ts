@@ -1,4 +1,4 @@
 export class Especialidad {
-    idEspecialidad? :string;
+    codigoEspecialidad? :string;
     nombre?:string;
 }

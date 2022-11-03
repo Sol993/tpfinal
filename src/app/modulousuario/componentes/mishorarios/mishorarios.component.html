@@ -1,0 +1,27 @@
+    <div class="btn-group" role="group" aria-label="Especialidades"*ngFor="let esp of this.usuario.especialidades">
+      <button type="button" class="btn btn-primary" (click)="mostrarHorarios(esp)">{{esp}}</button>
+    </div>
+    <div *ngIf="verHorariosEspecialista">
+        <div class="btn-group" role="group" aria-label="Horarios" *ngFor="let dias of keys(diasAtencion)">
+            <button  type="button" (click)="seleccionarDiaAtencion($event,dias)" class="btn btn-primary" [style.background-color] = "'red'">
+            {{dias | primerLetraMayuscula}}
+            </button>
+          </div>
+          <div class="row">
+            <div class="btn-group" role="group" aria-label="Turnos">
+                <button  type="button" (click)="seleccionarHorario($event,'8-13')" class="btn btn-primary" [style.background-color] = "'red'">
+                8 - 13
+                </button>
+                <button  type="button"  (click)="seleccionarHorario($event,'14-20')" class="btn btn-primary" [style.background-color] = "'red'">
+                14 - 20
+                </button>
+              </div>       
+          </div>
+   </div>
+   <div *ngIf="verHorariosEspecialista">
+      <div class="btn-group" role="group" aria-label="Agregarhorario">
+        <button  type="button" (click)="guardarHorario()" class="btn btn-success">
+            Guardar
+        </button>
+      </div>
+</div>

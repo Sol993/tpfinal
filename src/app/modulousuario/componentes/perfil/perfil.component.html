@@ -1,17 +1,25 @@
 <div class="p-4 p-md-5 mb-4 rounded text-bg-dark">
-<div class="card mb-3" style="max-width: 540px;">
+  <div class="card mb-3" style="max-width: 540px;">
     <div class="row g-0">
-      <div class="col-md-4">
-        <img src='{{this.usuario.imagenDePerfil}}' class="img-fluid rounded-start" alt="...">
-      </div>
-      <div class="col-md-8">
-        <div class="card-body">
-          <h5 class="card-title color-card"> {{this.usuario.nombre}},{{this.usuario.nombre}}</h5>
-          <p class="card-text color-card">Email: {{this.usuario.email}}</p>
-          <p class="card-text color-card">Edad: {{this.usuario.edad}}</p>
-          <p class="card-text"><small class="text-muted">DNI: {{this.usuario.dni}}</small></p>
+        <div class="col-md-4">
+          <img src='{{this.usuario.imagenDePerfil}}' class="img-fluid rounded-start" alt="...">
         </div>
-      </div>
+        <div class="col-md-8">
+          <div class="card-body">
+            <h5 class="card-title color-card"> {{this.usuario.nombre}},{{this.usuario.nombre}}</h5>
+            <p class="card-text color-card">Email: {{this.usuario.email}}</p>
+            <p class="card-text color-card">Edad: {{this.usuario.edad}}</p>
+            <p class="card-text"><small class="text-muted">DNI: {{this.usuario.dni}}</small></p>
+           <button *ngIf="this.usuario.rol=='Especialista'" class="btn btn-success" (click)="mostrarHorarios()">Mis horarios</button>
+          </div>
+        </div>
     </div>
   </div>
+  <div *ngIf="mostrarMisturnos && this.usuario.rol == 'Especialista'" >
+    <p>Seleccione una Especialidad</p>
+    <app-mishorarios [usuarioInput]="this.usuario"></app-mishorarios>
+  </div>
+</div>
+<div class="text-center">
+  <app-misturnos [usuarioInput]="this.usuario"></app-misturnos>
 </div>

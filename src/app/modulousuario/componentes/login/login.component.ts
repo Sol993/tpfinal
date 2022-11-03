@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { map } from 'rxjs';
 import { Usuario } from 'src/app/clases/usuario';
 import { ClinicaservicioService } from 'src/app/servicios/clinicaservicio.service';
 import Swal from 'sweetalert2';
@@ -16,11 +17,12 @@ export class LoginComponent implements OnInit {
   public email : string = "";
   public password : string = "";
   loguearse = this.fb.group({
- 
     'email': ['', [Validators.required, Validators.email]],
     'password': ['',[Validators.required]],
   });
  usuario:Usuario= new Usuario();
+
+
 
   constructor(private fb: FormBuilder,private _ser: ClinicaservicioService,private _router: Router){ }
 
@@ -82,4 +84,5 @@ usuarioEspecialitaDos(){
   this.email="dani@doc.com";
   this.password="123456";
 }
+
 }

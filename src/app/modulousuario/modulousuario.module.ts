@@ -11,8 +11,12 @@ import { AgregarespecialidadComponent } from './componentes/agregarespecialidad/
 import { LoginComponent } from './componentes/login/login.component';
 import { AdministracionComponent } from './componentes/administracion/administracion.component';
 import { PerfilComponent } from './componentes/perfil/perfil.component';
-import { LoadingComponent } from '../componentes/loading/loading.component';
-
+import { MisturnosComponent } from './componentes/misturnos/misturnos.component';
+import { MishorariosComponent } from './componentes/mishorarios/mishorarios.component';
+import { PrimerLetraMayusculaPipe } from '../pipes/primer-letra-mayuscula.pipe';
+import { TurnosComponent } from './componentes/turnos/turnos.component';
+import { SolicitarturnosComponent } from './componentes/solicitarturnos/solicitarturnos.component';
+import { RecaptchaFormsModule, RecaptchaModule } from 'ng-recaptcha';
 
 @NgModule({
   declarations: [
@@ -24,12 +28,20 @@ import { LoadingComponent } from '../componentes/loading/loading.component';
     LoginComponent,
     AdministracionComponent,
     PerfilComponent,
+    MisturnosComponent,
+    MishorariosComponent,
+    PrimerLetraMayusculaPipe,
+    TurnosComponent,
+    SolicitarturnosComponent,
+
   ],
   imports: [
     CommonModule,
     ModulousuarioRoutingModule,
     ReactiveFormsModule,
     FormsModule,
+    RecaptchaModule,
+    RecaptchaFormsModule
     
   ], 
 

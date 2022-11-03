@@ -14,7 +14,9 @@ import { environment } from 'src/environments/environment';
 import { LoadingComponent } from './componentes/loading/loading.component';
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { NgxSpinnerModule } from "ngx-spinner";
-
+import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
+import { AngularFireStorageModule } from '@angular/fire/compat/storage';
+import { RECAPTCHA_SETTINGS, RecaptchaFormsModule, RecaptchaModule, RecaptchaSettings } from 'ng-recaptcha';
 
 @NgModule({
   declarations: [
@@ -32,12 +34,22 @@ import { NgxSpinnerModule } from "ngx-spinner";
     ReactiveFormsModule,
     AngularFireAuthModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireDatabaseModule,
+    AngularFireStorageModule,
     BrowserAnimationsModule,
-    NgxSpinnerModule.forRoot({ type: 'ball-scale-multiple' })
+    NgxSpinnerModule.forRoot({ type: 'ball-scale-multiple' }),
+    RecaptchaModule,
+    RecaptchaFormsModule,
 
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  providers: [ClinicaservicioService],
+  providers: [ClinicaservicioService,{
+    provide: RECAPTCHA_SETTINGS,
+    useValue: {
+      siteKey: environment.recaptcha.siteKey,
+    } as RecaptchaSettings,
+  },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

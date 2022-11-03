@@ -1,0 +1,35 @@
+<div *ngIf="usuario.rol=='Paciente'">
+    <div>
+        <input type="text" class="form-control"  placeholder="Ingrese especialidad o especialista...">
+    </div>
+    <div class="card" style="width: 18rem;">
+        <div class="card-body">
+        <h5 class="card-title">Fecha: 14/03/2033 </h5>
+        <h6 class="card-subtitle mb-2 text-muted">Especialista</h6>
+        <p class="card-text">Especialidad</p>
+        <p class="card-text">Estado</p>
+        <a href="#" class="btn btn-primary">Cancelar</a>
+        <a href="#" class="btn btn-primary">Encuesta</a>
+        <a href="#" class="btn btn-primary">Ver reseña</a>
+        <a href="#" class="btn btn-primary">Calificar Atención</a>
+        </div>
+    </div>
+    
+</div>
+
+<div *ngIf="usuario.rol=='Especialista'">
+    <div>
+        <input type="text" class="form-control"  placeholder="Ingrese especialidad o especialista...">
+    </div>
+    <div class="card" style="width: 18rem;">
+        <div class="card-body">
+        <h5 class="card-title">Fecha: 14/03/2033 </h5>
+        <h6 class="card-subtitle mb-2 text-muted">Paciente</h6>
+        <p class="card-text">Estado</p>
+        <a href="#" class="btn btn-primary">Rechazar</a>
+        <a href="#" class="btn btn-primary">Aceptar</a>
+        <a href="#" class="btn btn-primary">Finalizar turno</a>
+        <a href="#" class="btn btn-primary">Ver Reseña</a>
+        </div>
+  </div>
+</div>

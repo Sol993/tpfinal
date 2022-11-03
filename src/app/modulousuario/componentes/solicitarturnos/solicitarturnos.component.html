@@ -1,0 +1,36 @@
+<div class="container">
+    <form>
+        <div class="mb-3" *ngIf="this.usuario.rol == 'Administrador'">
+          <label for="paciente" class="form-label">Seleccione un paciente</label>
+          <select id="pacienteSelect" class="form-select">
+            <option [value]="item.idUsuario" *ngFor="let item of usuarios of filtroRol('Paciente')">{{item.nombre}} {{item.apellido}}</option>
+          </select>          
+        </div>
+        <div class="mb-3">
+            <label for="especialista" class="form-label" >Seleccione un especialista</label>
+            <select id="especialista" class="form-select" (change)="onChangeEspecialista($event)">
+                <option [value]="item.idUsuario" *ngFor="let item of usuarios of filtroRol('Especialista')">{{item.nombre}} {{item.apellido}}</option>
+            </select>  
+        </div>
+        
+        <div class="mb-3">
+            <label for="especialidad" class="form-label">Seleccione una especialidad</label>
+            <select id="especialidad" class="form-select">
+                <option [value]="item" *ngFor="let item of especialidades">{{item}}</option>
+            </select>  
+        </div>
+        <div class="mb-3">
+            <label for="fechaTurno" class="form-label">Seleccione una fecha</label>
+            <select id="fechaTurno" class="form-select">
+              <option>15 dias en adelante</option>
+            </select>  
+        </div>
+        <div class="mb-3">
+            <label for="horaTurno" class="form-label">Seleccione un horario</label>
+            <select id="horaTurno" class="form-select">
+              <option>Hora de turno</option>
+            </select>  
+        </div>
+        <button type="submit" class="btn btn-primary">Solicitar Turno</button>
+      </form>
+</div>

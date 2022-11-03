@@ -1,4 +1,4 @@
-<div class="text-center p-5 mb-4 bg-light rounded-3">
+<div class="text-center p-5 mb-4 bg-light rounded-3" >
     <app-selectorroles [item]="mostrarElemento" (seleccionarRolEvent)="mostrarFormulario($event) "></app-selectorroles>
 </div>
 <div class="p-5 mb-4 bg-light rounded-3" *ngIf="rolObtenido">
@@ -10,7 +10,7 @@
             *ngIf="registroUsuario.controls.nombre.errors?.['required'] &&
             registroUsuario.controls.nombre.touched">
             El nombre es requerido
-        </div>      
+            </div>      
         </div>
         <div >
             <label for="apellido" class="form-label">Apellido*</label>
@@ -36,29 +36,26 @@
     </div>
     <div >
         <label>Password*</label>
-        <input type="password" formControlName="password" class="form-control">
+        <input type="password" formControlName="password" placeholder="Ingrese la contraseña" class="form-control">
         <div class="invalid alert alert-danger"
             *ngIf="registroUsuario.controls.password.errors?.['required'] &&
             registroUsuario.controls.password.touched">
-            La Password es requerido
+           Password es requerido
          </div>
     </div>
 
     <div >
         <label>Confirm Password*</label>
-        <input
-          type="password"
-          formControlName="confirmPassword"
-          class="form-control">
+        <input type="password" formControlName="confirmPassword" placeholder="Repita la contraseña" class="form-control">
          <div class="invalid alert alert-danger"
             *ngIf="registroUsuario.controls.confirmPassword.errors?.['required'] &&
             registroUsuario.controls.confirmPassword.touched">
-            La Password es requerido
+             Password es requerido
         </div>
-        <div class="invalid alert alert-danger" 
-             *ngIf="registroUsuario.controls.confirmPassword.errors?.['confirmedValidator']">
-             Password and Confirm Password must be match.
-            </div>
+        <div class="invalid alert alert-danger"
+        *ngIf="validadorpassword">
+         Las contraseñas deben coincidir
+    </div>
     </div>
   
     <div >
@@ -109,20 +106,57 @@
           registroUsuario.controls.especialidades.touched">
             La especialidad es requerida
        </div> 
-       <button class="btn btn-success" (click)="sumarEspecialidad()">Agregar nueva especialidad</button>   
+       <button type="button" class="btn btn-success" (click)="sumarEspecialidad()">Agregar nueva especialidad</button>   
        <div *ngIf="crearnuevaEspecialidad">
         <app-agregarespecialidad></app-agregarespecialidad>
        </div>
      </div>
-     <button type="submit" 
-     class="btn btn-primary btn-block btn-registro">
-     Registrate
-   </button>
-
-       <button type="submit" 
-           class="btn btn-primary btn-block btn-registro" 
-           (click)="onReset()">
-           Limpiar campos
-       </button>
-    </form>
+     <div>
+        <label for="imgPerfilUno" class="form-label">Imagen de Perfil *</label>
+        <input type="file" class="form-control text-nowrap text-truncate" (change)="selectFile($event)" id="imgPerfilUno" placeholder="Seleccionar imagen..." formControlName="imgPerfilUno">
+     </div>
+     <div *ngIf="currentFileUpload" class="progress mt-2">
+        <div
+          class="progress-bar progress-bar-info"
+          role="progressbar"
+          attr.aria-valuenow="{{ percentage }}"
+          aria-valuemin="0"
+          aria-valuemax="100"
+          [ngStyle]="{ width: percentage + '%' }"
+        >
+          {{ percentage }}%
+        </div>
+      </div>
+     <br>
+     <div *ngIf="rolObtenido=='Paciente'">
+      <label for="imgPerfilDos" class="form-label">Imagen de Perfil 2 *</label>
+      <input type="file" class="form-control text-nowrap text-truncate" (change)="selectFile($event)" id="imgPerfilDos" placeholder="Seleccionar imagen..." formControlName="imgPerfilDos">
+   </div>
+   <div *ngIf="currentFileUpload" class="progress mt-2">
+      <div
+        class="progress-bar progress-bar-info"
+        role="progressbar"
+        attr.aria-valuenow="{{ percentage }}"
+        aria-valuemin="0"
+        aria-valuemax="100"
+        [ngStyle]="{ width: percentage + '%' }"
+      >
+        {{ percentage }}%
+      </div>
+    </div>
+     <br>
+     <div class="row mt-3">
+      <div class="col-sm-12 mb-2">
+        <re-captcha id="recaptcha" name="recaptcha" #recaptcha="ngModel" [(ngModel)]="token" required [class.is-invalid]="recaptcha.invalid && (recaptcha.dirty || recaptcha.touched)"></re-captcha>
+        <div *ngIf="recaptcha.invalid && (recaptcha.dirty || recaptcha.touched)" class="invalid-feedback">
+          <div *ngIf="recaptcha.errors?.['required']">Captcha es requerido.</div>
+        </div>
+      </div>
+    </div>
+    <br>
+     <div class="d-grid gap-2 d-md-block" role="group" >
+      <button type="submit" [disabled]="!registroUsuario.valid" class="btn btn-primary btn-block btn-registro">Registrate</button>
+      <button type="button" class="btn btn-primary btn-block btn-registro" (click)="onReset()">Limpiar campos </button>
+    </div>
+  </form>
 </div>

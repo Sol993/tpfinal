@@ -19,7 +19,10 @@ export class AgregarespecialidadComponent implements OnInit {
   }
   
   agregarEspecialidad(){
+    //VERIFICAR EXISTENCIA? 
+    this.nuevaEspecialidad.codigoEspecialidad = this.textoingresado?.trim().charAt(4).toUpperCase();
     this.nuevaEspecialidad.nombre= this.textoingresado;
+
     this._ser.agregarEspecialidad(this.nuevaEspecialidad);
   }
 
