@@ -2,6 +2,7 @@
       <button type="button" class="btn btn-primary" (click)="mostrarHorarios(esp)">{{esp}}</button>
     </div>
     <div *ngIf="verHorariosEspecialista">
+
         <div class="btn-group" role="group" aria-label="Horarios" *ngFor="let dias of keys(diasAtencion)">
             <button  type="button" (click)="seleccionarDiaAtencion($event,dias)" class="btn btn-primary" [style.background-color] = "'red'">
             {{dias | primerLetraMayuscula}}
@@ -9,12 +10,20 @@
           </div>
           <div class="row">
             <div class="btn-group" role="group" aria-label="Turnos">
-                <button  type="button" (click)="seleccionarHorario($event,'8-13')" class="btn btn-primary" [style.background-color] = "'red'">
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="8 - 13" (click)="seleccionarHorario($event,'8-13')">
+                <label class="form-check-label" for="inlineCheckbox1">8 - 13</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="14 - 20" (click)="seleccionarHorario($event,'14-20')">
+                <label class="form-check-label" for="inlineCheckbox2">14 - 20</label>
+              </div>
+              <!--  <button  type="button" (click)="seleccionarHorario($event,'8-13')" class="btn btn-primary" [style.background-color] = "'red'">
                 8 - 13
                 </button>
                 <button  type="button"  (click)="seleccionarHorario($event,'14-20')" class="btn btn-primary" [style.background-color] = "'red'">
                 14 - 20
-                </button>
+                </button>-->
               </div>       
           </div>
    </div>

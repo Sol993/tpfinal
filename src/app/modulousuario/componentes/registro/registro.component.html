@@ -1,162 +1,150 @@
 <div class="text-center p-5 mb-4 bg-light rounded-3" >
-    <app-selectorroles [item]="mostrarElemento" (seleccionarRolEvent)="mostrarFormulario($event) "></app-selectorroles>
+  <app-selectorroles [item]="mostrarElemento" (seleccionarRolEvent)="mostrarFormulario($event) "></app-selectorroles>
 </div>
 <div class="p-5 mb-4 bg-light rounded-3" *ngIf="rolObtenido">
-    <form [formGroup]="registroUsuario" (ngSubmit)="registrar()">
-        <div>
-            <label for="nombre" class="form-label">Nombre*</label>
-            <input type="text" class="form-control" id="nombre" placeholder="Ingrese nombre" formControlName="nombre">
-            <div class="invalid alert alert-danger" 
-            *ngIf="registroUsuario.controls.nombre.errors?.['required'] &&
-            registroUsuario.controls.nombre.touched">
-            El nombre es requerido
-            </div>      
-        </div>
-        <div >
-            <label for="apellido" class="form-label">Apellido*</label>
-            <input type="text" class="form-control" id="apellido" placeholder="Ingrese apellido" formControlName="apellido"> 
-            <div class="invalid alert alert-danger"
-            *ngIf="registroUsuario.controls.apellido.errors?.['required'] &&
-            registroUsuario.controls.apellido.touched">
-            El apellido es requerido
-        </div>
+  <form [formGroup]="registroUsuario" (ngSubmit)="registrar()">
+    <div>
+      <label for="nombre" class="form-label">Nombre*</label>
+      <input type="text" class="form-control" id="nombre" placeholder="Ingrese nombre" formControlName="nombre">
+      <div class="invalid alert alert-danger" 
+          *ngIf="registroUsuario.controls.nombre.errors?.['required'] &&
+          registroUsuario.controls.nombre.touched">
+          El nombre es requerido
+     </div>      
     </div>
     <div>
-        <label>Email*</label>
-        <input type="text" class="form-control" formControlName="email" placeholder="Ingrese el email" />
+      <label for="apellido" class="form-label">Apellido*</label>
+      <input type="text" class="form-control" id="apellido" placeholder="Ingrese apellido" formControlName="apellido"> 
         <div class="invalid alert alert-danger"
-            *ngIf="registroUsuario.controls.email.errors?.['required'] &&
-            registroUsuario.controls.email.touched">
-            El email es requerido
-      </div>
-       <div class="invalid alert alert-danger"
-        *ngIf="registroUsuario.controls.email.errors?.['email']">
-            El mail no es válido
-      </div>
-    </div>
-    <div >
-        <label>Password*</label>
-        <input type="password" formControlName="password" placeholder="Ingrese la contraseña" class="form-control">
-        <div class="invalid alert alert-danger"
-            *ngIf="registroUsuario.controls.password.errors?.['required'] &&
-            registroUsuario.controls.password.touched">
-           Password es requerido
-         </div>
-    </div>
-
-    <div >
-        <label>Confirm Password*</label>
-        <input type="password" formControlName="confirmPassword" placeholder="Repita la contraseña" class="form-control">
-         <div class="invalid alert alert-danger"
-            *ngIf="registroUsuario.controls.confirmPassword.errors?.['required'] &&
-            registroUsuario.controls.confirmPassword.touched">
-             Password es requerido
+          *ngIf="registroUsuario.controls.apellido.errors?.['required'] &&
+          registroUsuario.controls.apellido.touched">
+          El apellido es requerido
         </div>
-        <div class="invalid alert alert-danger"
-        *ngIf="validadorpassword">
-         Las contraseñas deben coincidir
+    </div>  
+    <div>
+      <label>Email*</label>
+      <input type="text" class="form-control" formControlName="email" placeholder="Ingrese el email" />
+      <div class="invalid alert alert-danger" *ngIf="registroUsuario.controls.email.errors?.['required'] &&
+                registroUsuario.controls.email.touched">
+        El email es requerido
+      </div>
+      <div class="invalid alert alert-danger" *ngIf="registroUsuario.controls.email.errors?.['email']">
+        El mail no es válido
+      </div>
     </div>
+    <div>
+      <label>Contraseña*</label>
+      <input type="password" formControlName="password" placeholder="Ingrese la contraseña" class="form-control">
+      <div class="invalid alert alert-danger" *ngIf="registroUsuario.controls.password.errors?.['required'] &&
+              registroUsuario.controls.password.touched">
+        La contraseña es requerida
+      </div>
     </div>
-  
-    <div >
+    <div>
+      <label>Confirmar contraseña*</label>
+      <input type="password" formControlName="confirmPassword" placeholder="Repita la contraseña" class="form-control">
+      <div class="invalid alert alert-danger" *ngIf="registroUsuario.controls.confirmPassword.errors?.['required'] &&
+              registroUsuario.controls.confirmPassword.touched">
+          La contraseña es requerida
+      </div>
+      <div class="invalid alert alert-danger" *ngIf="validadorpassword">
+        Las contraseñas deben coincidir
+      </div>
+    </div>
+    <div>
       <label for="edad" class="form-label">Edad*</label>
       <input type="number" class="form-control" id="edad" placeholder="Ingrese edad" formControlName="edad">
-      <div class="invalid alert alert-danger"
-        *ngIf="registroUsuario.controls.edad.errors?.['required'] &&
-        registroUsuario.controls.edad.touched" >
+      <div class="invalid alert alert-danger" *ngIf="registroUsuario.controls.edad.errors?.['required'] &&
+            registroUsuario.controls.edad.touched">
         La edad es requerida
-    </div>
-      <div class="invalid alert alert-danger"
-         *ngIf="registroUsuario.controls.edad.errors?.['min'] || 
-         registroUsuario.controls.edad.errors?.['max'] &&
-         registroUsuario.controls.edad.touched">
-            La edad debe ser de 18 a 99 años
-        </div>
-    </div>
-    <div >
-        <label for="dni" class="form-label">DNI *</label>
-        <input type="number" class="form-control" id="dni" placeholder="Ingrese DNI" formControlName="dni">
-        <div class="invalid alert alert-danger"
-          *ngIf="registroUsuario.controls.dni.errors?.['required'] &&
-          registroUsuario.controls.dni.touched">
-          El DNI es requerida
-         </div>    
-        <div class="invalid alert alert-danger"
-            *ngIf="registroUsuario.controls.dni.errors?.['min'] || 
-            registroUsuario.controls.dni.errors?.['max'] &&
-            registroUsuario.controls.dni.touched">
-            El DNI debe ser mayor a 10000000 
-        </div>
-     </div>
-     <div *ngIf="rolObtenido=='Paciente'">
-        <label for="obrasocial" class="form-label">Obra social *</label>
-        <input type="text" class="form-control" id="obrasocial" placeholder="Ingrese Obra social" formControlName="obrasocial">
-        <div class="invalid alert alert-danger"
-          *ngIf="registroUsuario.controls.obrasocial.errors?.['required'] &&
-          registroUsuario.controls.obrasocial.touched">
-          La Obra social es requerida
-       </div>    
-     </div>
-     <div *ngIf="rolObtenido=='Especialista'">
-        <label for="especialidad" class="form-label">Especialidad *</label>
-       <app-listadoespecialidades (selecionarEspecialidadEvent)="especilidadesSeleccionadas($event)"></app-listadoespecialidades>
-       <input type="text" class="form-control" id="especialidades" [(ngModel)]="seleccionados" formControlName="especialidades">
-       <div class="invalid alert alert-danger"
-          *ngIf="registroUsuario.controls.especialidades.errors?.['required'] &&
-          registroUsuario.controls.especialidades.touched">
-            La especialidad es requerida
-       </div> 
-       <button type="button" class="btn btn-success" (click)="sumarEspecialidad()">Agregar nueva especialidad</button>   
-       <div *ngIf="crearnuevaEspecialidad">
-        <app-agregarespecialidad></app-agregarespecialidad>
-       </div>
-     </div>
-     <div>
-        <label for="imgPerfilUno" class="form-label">Imagen de Perfil *</label>
-        <input type="file" class="form-control text-nowrap text-truncate" (change)="selectFile($event)" id="imgPerfilUno" placeholder="Seleccionar imagen..." formControlName="imgPerfilUno">
-     </div>
-     <div *ngIf="currentFileUpload" class="progress mt-2">
-        <div
-          class="progress-bar progress-bar-info"
-          role="progressbar"
-          attr.aria-valuenow="{{ percentage }}"
-          aria-valuemin="0"
-          aria-valuemax="100"
-          [ngStyle]="{ width: percentage + '%' }"
-        >
-          {{ percentage }}%
-        </div>
       </div>
-     <br>
-     <div *ngIf="rolObtenido=='Paciente'">
-      <label for="imgPerfilDos" class="form-label">Imagen de Perfil 2 *</label>
-      <input type="file" class="form-control text-nowrap text-truncate" (change)="selectFile($event)" id="imgPerfilDos" placeholder="Seleccionar imagen..." formControlName="imgPerfilDos">
-   </div>
-   <div *ngIf="currentFileUpload" class="progress mt-2">
-      <div
-        class="progress-bar progress-bar-info"
-        role="progressbar"
-        attr.aria-valuenow="{{ percentage }}"
-        aria-valuemin="0"
-        aria-valuemax="100"
-        [ngStyle]="{ width: percentage + '%' }"
-      >
+      <div class="invalid alert alert-danger" *ngIf="registroUsuario.controls.edad.errors?.['min'] || 
+             registroUsuario.controls.edad.errors?.['max'] &&
+             registroUsuario.controls.edad.touched">
+        La edad debe ser de 18 a 99 años
+      </div>
+    </div>
+    <div>
+      <label for="dni" class="form-label">DNI *</label>
+      <input type="number" class="form-control" id="dni" placeholder="Ingrese DNI" formControlName="dni">
+      <div class="invalid alert alert-danger" *ngIf="registroUsuario.controls.dni.errors?.['required'] &&
+            registroUsuario.controls.dni.touched">
+        El DNI es requerido
+      </div>
+      <div class="invalid alert alert-danger" *ngIf="registroUsuario.controls.dni.errors?.['min'] || 
+              registroUsuario.controls.dni.errors?.['max'] &&
+              registroUsuario.controls.dni.touched">
+        El DNI debe ser mayor a 10000000
+      </div>
+    </div>
+
+    <div *ngIf="rolObtenido=='Paciente'">
+      <label for="obrasocial" class="form-label">Obra social *</label>
+      <input type="text" class="form-control" id="obrasocial" placeholder="Ingrese Obra social"
+        formControlName="obrasocial">
+      <div class="invalid alert alert-danger" *ngIf="registroUsuario.controls.obrasocial.errors?.['required'] &&
+            registroUsuario.controls.obrasocial.touched">
+        La Obra social es requerida
+      </div>
+    </div>
+    <div *ngIf="rolObtenido=='Especialista'">
+      <label for="especialidad" class="form-label">Especialidad *</label>
+      <app-listadoespecialidades (selecionarEspecialidadEvent)="especilidadesSeleccionadas($event)">
+      </app-listadoespecialidades>
+      <input type="text" class="form-control" id="especialidades" [(ngModel)]="seleccionados"
+        formControlName="especialidades">
+      <div class="invalid alert alert-danger" *ngIf="registroUsuario.controls.especialidades.errors?.['required'] &&
+            registroUsuario.controls.especialidades.touched">
+        La especialidad es requerida
+      </div>
+      <button type="button" class="btn btn-success" (click)="sumarEspecialidad()">Agregar nueva especialidad</button>
+      <div *ngIf="crearnuevaEspecialidad">
+        <app-agregarespecialidad></app-agregarespecialidad>
+      </div>
+    </div>
+    <div>
+      <label for="imgPerfilUno" class="form-label">Imagen de Perfil *</label>
+      <input type="file" class="form-control text-nowrap text-truncate" (change)="selectFile($event)" id="imgPerfilUno"
+        placeholder="Seleccionar imagen..." formControlName="imgPerfilUno">
+        <div class="invalid alert alert-danger" *ngIf="registroUsuario.controls.imgPerfilUno.errors?.['required'] &&
+        registroUsuario.controls.imgPerfilUno.touched">
+       Imagen de perfil es requerida
+      </div>
+    </div>
+    <div *ngIf="currentFileUpload" class="progress mt-2">
+      <div class="progress-bar progress-bar-info" role="progressbar" attr.aria-valuenow="{{ percentage }}" aria-valuemin="0"
+        aria-valuemax="100" [ngStyle]="{ width: percentage + '%' }">
         {{ percentage }}%
       </div>
     </div>
-     <br>
-     <div class="row mt-3">
-      <div class="col-sm-12 mb-2">
-        <re-captcha id="recaptcha" name="recaptcha" #recaptcha="ngModel" [(ngModel)]="token" required [class.is-invalid]="recaptcha.invalid && (recaptcha.dirty || recaptcha.touched)"></re-captcha>
-        <div *ngIf="recaptcha.invalid && (recaptcha.dirty || recaptcha.touched)" class="invalid-feedback">
-          <div *ngIf="recaptcha.errors?.['required']">Captcha es requerido.</div>
-        </div>
+    <br>
+    <div *ngIf="rolObtenido=='Paciente'">
+      <label for="imgPerfilDos" class="form-label">Imagen de Perfil 2 *</label>
+      <input type="file" class="form-control text-nowrap text-truncate" (change)="selectFile($event)" id="imgPerfilDos"
+        placeholder="Seleccionar imagen..." formControlName="imgPerfilDos">
+        <div class="invalid alert alert-danger" *ngIf="registroUsuario.controls.imgPerfilDos.errors?.['required'] &&
+        registroUsuario.controls.imgPerfilDos.touched">
+       Imagen de perfil es requerida
       </div>
     </div>
-    <br>
-     <div class="d-grid gap-2 d-md-block" role="group" >
-      <button type="submit" [disabled]="!registroUsuario.valid" class="btn btn-primary btn-block btn-registro">Registrate</button>
+    <div *ngIf="currentFileUpload" class="progress mt-2">
+      <div class="progress-bar progress-bar-info" role="progressbar" attr.aria-valuenow="{{ percentageDos }}" aria-valuemin="0"
+        aria-valuemax="100" [ngStyle]="{ width: percentageDos + '%' }">
+        {{ percentageDos }}%
+      </div>
+    </div>
+    <div class="d-grid gap-2 d-md-block" role="group" >
+      <button type="submit"  class="btn btn-primary btn-block btn-registro">Registrate</button>
       <button type="button" class="btn btn-primary btn-block btn-registro" (click)="onReset()">Limpiar campos </button>
+      <div class="col-4">
+        <button
+          class="btn btn-success btn-sm"
+          [disabled]="!selectedFiles"
+          (click)="upload()"
+        >
+          Upload
+        </button>
+      </div>
     </div>
   </form>
-</div>
+  </div>

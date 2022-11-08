@@ -24,6 +24,8 @@ export class MishorariosComponent implements OnInit {
   turnoSeleccionado = new Array<String>;
   arrayDiaHorarioAtencionSeleccionado = new Array<Horadiaatencion>();
   diaHorarioAtencion = new Array<Horadiaatencion>();
+  diaHorarioAtencionTest = new Array<Horadiaatencion>();
+
   constructor(private _servicio:ClinicaservicioService) { }
 
   ngOnInit(): void {
@@ -33,6 +35,7 @@ export class MishorariosComponent implements OnInit {
     // only run when property "data" changed
     if (changes['usuarioInput']) {
         this.usuario = this.usuarioInput;
+        this.obtenerHorarios()
 
         //obtenerDiasDeAtencion
        // this.obtenerTurnos(this.usuario.idUsuario);
@@ -67,12 +70,12 @@ export class MishorariosComponent implements OnInit {
   seleccionarHorario(event: Event, paramHora : string)
   {
     
-    if((event.target as HTMLInputElement).style.backgroundColor == "red"){
-      (event.target as HTMLInputElement).style.backgroundColor = "green"
+    if((event.target as HTMLInputElement).checked){
+
       this.turnoSeleccionado.push(paramHora);
 
     } else{
-      (event.target as HTMLInputElement).style.backgroundColor = "red"
+
     //  this.turnoSeleccionado = this.diasSeleccionados.filter(obj => obj !== paramHora);
       const index = this.turnoSeleccionado.indexOf(paramHora);
       if (index !== -1) {
@@ -81,30 +84,39 @@ export class MishorariosComponent implements OnInit {
 
     }
   }
+
+  obtenerHorarios(){
+    this._servicio.obtenerHorarios().snapshotChanges().pipe(
+      map(changes =>
+        changes.map(c =>
+          ({ id: c.payload.doc.id, ...c.payload.doc.data() })
+        )
+      )
+    ).subscribe(data => {
+      this.diaHorarioAtencionTest = data;
+    })
+  }
+
   guardarHorario(){
-      this.diaHorarioAtencion = new Array<Horadiaatencion>();
+      this.diaHorarioAtencion = new Array<Object>();
 
       this.diasSeleccionados.forEach(element => {
         let dia = element as keyof typeof DiasAtencion;
         this.turnoSeleccionado.forEach(item => {
-          let diaHorarioAtencionSeleccionado = new Horadiaatencion();
-          diaHorarioAtencionSeleccionado.dia = DiasAtencion[dia];
-          diaHorarioAtencionSeleccionado.horaInicio = item.split("-")[0];
-          diaHorarioAtencionSeleccionado.horaFin  = item.split("-")[1];
+          let diaHorarioAtencionSeleccionado = new Object({'dia' : DiasAtencion[dia], 'horaInicio' :  item.split("-")[0], 'horaFin' : item.split("-")[1]});
           this.diaHorarioAtencion.push(diaHorarioAtencionSeleccionado);
         });
 
       });
+      console.log(this.diaHorarioAtencionTest)
+      console.log(this.diaHorarioAtencion)
 
-      this.horarios.diaHorarioAtencion = this.diaHorarioAtencion[0];
       this.horarios.idEspecialista = this.usuario.idUsuario;
       this.horarios.idEspecialidad = this.especialidadSeleccionada;
-      console.log(this.horarios)
-      this._servicio.agregarHorariosEspecialista(this.horarios).then(() => {
-        console.log('Created new item successfully!');
-      });
+      this.horarios.diaHorarioAtencion = this.diaHorarioAtencion;
+      //this.horarios.diaHorarioAtencion = this.diaHorarioAtencionTest;
 
-
+      this._servicio.agregarHorariosEspecialista(this.horarios);
   }
 
   obtenerHorario(idEspecialista : string){

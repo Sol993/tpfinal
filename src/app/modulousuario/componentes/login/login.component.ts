@@ -35,6 +35,7 @@ export class LoginComponent implements OnInit {
 
     this._ser.login(this.usuario.email,this.usuario.password).then(res => { 
       if (res !== null) {      
+        
         this._router.navigate(['/home']);
   
        }else{

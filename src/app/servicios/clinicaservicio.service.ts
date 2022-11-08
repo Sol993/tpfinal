@@ -29,7 +29,7 @@ export class ClinicaservicioService {
     this.especialidad = _db.collection('especialidades');
     this.turnos = _db.collection('turnos');
     this.horarios = _db.collection('horariosEspecialista');
-    this.hora = _db.collection('horario');
+    this.hora = _db.collection('horarios');
 
 
    }
@@ -38,8 +38,9 @@ export class ClinicaservicioService {
   {
     try
     {
-      return await this._auth.createUserWithEmailAndPassword(email,password);
-    }
+      return await this._auth.createUserWithEmailAndPassword(email,password);     
+
+   }
     catch(error)
     {
       Swal.fire({
@@ -51,6 +52,18 @@ export class ClinicaservicioService {
       return null;
     }
   }
+  
+  SendVerificationMail() {
+    return this._auth.currentUser
+      .then((user) => {
+        return user?.sendEmailVerification();
+      })
+      .then(() => {
+        //this.router.navigate(['verify-email-address']);
+      });
+  }
+
+  
   //login
   async login(email: string, password: string){
     try
@@ -65,6 +78,19 @@ export class ClinicaservicioService {
            this.currentUser = userRef.data();
            let idUsuario:string = this.currentUser.idUsuario
            localStorage.setItem("usuarioID", idUsuario)
+           if(this.currentUser.rol == "Paciente"){
+            if (user.user?.emailVerified !== true) {
+              this.SendVerificationMail();
+              Swal.fire({
+                title: '"Por favor verifique su correo electronico"',
+                width: 600,
+                padding: '3em',
+                color: '#716add',
+              })
+              this.logOut();
+
+            }
+           } 
          })
        })
       })
@@ -77,7 +103,6 @@ export class ClinicaservicioService {
         padding: '3em',
         color: '#716add',
       })
-      console.log("No se ha podio realizar el login "+ error);
       return null;
     }
   }
@@ -117,6 +142,10 @@ export class ClinicaservicioService {
     return this.turnos;
   }
 
+  obtenerHorarios(): AngularFirestoreCollection<Horadiaatencion> {
+    return this.hora;
+  }
+
   obtenerTurnosPorUsuario(idFilter: string):  AngularFirestoreCollection<Turno>{
     return this._db.collection('turnos', ref => ref.where('idUsuario','==', idFilter ));
 
@@ -136,7 +165,8 @@ export class ClinicaservicioService {
   }
 
   agregarHorario(nuevoHorario:  Horadiaatencion): any {
-    this.hora.add({ ...nuevoHorario});
-    
-}
+    return this.hora.add({ ...nuevoHorario});
+
+  }
+
 }
